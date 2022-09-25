@@ -43,4 +43,15 @@ def parse_impulse():
         films_data.append(film_dict)
     return films_data
 
-parse_impulse()
+#Получаем инфу по API от комфорткино
+def parse_comfortkino(place:str)->"json":
+    place = place.lower().strip()
+    if place == "fokus" or place == "mega" or place == "almaz":
+        link = f"https://{place}.comfortkino.ru/local/php_interface/api/v1/films/playbill/"
+        data = requests.get(link, headers={'User-Agent':ua}).json()
+        for film_counter in range(len(data['data'])):
+            data['data'][film_counter]['url'] = f"https://{place}.comfortkino.ru" + data['data'][i]['url'] 
+        print(data)    
+    else:
+        raise ValueError('Возможные варианты "fokus" or "mega" or "almaz"')
+
