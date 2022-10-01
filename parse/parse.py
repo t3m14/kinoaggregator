@@ -48,10 +48,11 @@ def parse_comfortkino(place:str)->"json":
     place = place.lower().strip()
     if place == "fokus" or place == "mega" or place == "almaz":
         link = f"https://{place}.comfortkino.ru/local/php_interface/api/v1/films/playbill/"
-        data = requests.get(link, headers={'User-Agent':ua}).json()
+        data = requests.get(link, headers={'User-Agent':"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"}).json()
         for film_counter in range(len(data['data'])):
-            data['data'][film_counter]['url'] = f"https://{place}.comfortkino.ru" + data['data'][i]['url'] 
-        print(data)    
+            data['data'][film_counter]['url'] = f"https://{place}.comfortkino.ru" + data['data'][film_counter]['url']
+            # data['data'][film_counter]['pushkin'] = f"https://{place}.comfortkino.ru" + data['data'][film_counter]['pushkin'] 
+        return data
     else:
         raise ValueError('Возможные варианты "fokus" or "mega" or "almaz"')
 
